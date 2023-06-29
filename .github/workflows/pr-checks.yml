@@ -1,0 +1,16 @@
+name: NPM Unit Testing
+
+on: 
+  - pull_request
+
+jobs:
+  prepare:
+    name: Prepare Repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./prepare
+
+      - name: Run Tests
+        run: |
+          npm test
+  

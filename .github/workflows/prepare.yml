@@ -1,0 +1,27 @@
+name: Prepare Repository
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2.3.4
+      with:
+        persist-credentials: false
+        token: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Using Node Version
+      uses: actions/setup-node@v1
+      with:
+        node-version-file: .nvmrc
+        
+    - name: Cache node modules
+      uses: actions/cache@v3
+      env:
+        cache-name: node-cache
+      with:
+        path: |
+          **/node_modules
+        key: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Initialize project
+      run: |
+        npm ci

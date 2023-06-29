@@ -1,0 +1,17 @@
+name: NPM Unit Testing
+
+on: workflow_dispatch
+  
+jobs:
+  prepare:
+    name: Prepare Repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./prepare
+
+      - name: Run Tests
+        run: |
+          echo "TODO deploy application"
+          # terraform init here
+          # terraform apply here
+  
